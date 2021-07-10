@@ -2,7 +2,7 @@
 
 namespace ChainOfResponsibility.Sandbox
 {
-    class FileData
+    public class FileData
     {
         public List<string> Fields { get; set; }
     }

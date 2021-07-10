@@ -1,4 +1,9 @@
 ﻿using System;
+using ChainOfResponsibility.Sandbox.Mapping;
+using ChainOfResponsibility.Sandbox.Runners;
+using ChainOfResponsibility.Sandbox.Validation;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace ChainOfResponsibility.Sandbox
 {
@@ -6,29 +11,27 @@ namespace ChainOfResponsibility.Sandbox
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-        }
-    }
+            using IHost host = CreateHostBuilder(args).Build();
 
-    public interface IHandler<T> where T: class
-    {
-        IHandler<T> SetNext(IHandler<T> next);
-        void Handle(T request);
-    }
+            var runner = host.Services.GetRequiredService<IRunner>();
 
-    public abstract class Handler<T> : IHandler<T> where T : class
-    {
-        private IHandler<T> Next { get; set; }
+            runner.Run();
 
-        public void Handle(T request)
-        {
-            Next?.Handle(request);
+            Console.WriteLine("done");
+            Console.ReadKey(true);
         }
 
-        public IHandler<T> SetNext(IHandler<T> next)
+        private static IHostBuilder CreateHostBuilder(string[] args)
         {
-            Next = next;
-            return Next;
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureServices((_, services) =>
+                    services
+                        .AddSingleton<IRunner, CORRunner>()
+                        .AddTransient<IValidator<Entity>, CommonValidator<Entity>>()
+                        .AddTransient<IValidator<DatabaseModel>, CommonValidator<DatabaseModel>>()
+                        .AddTransient<IMapper<FileData, Entity>, FileDataToEntityMapper>()
+                        .AddTransient<IMapper<Entity, DatabaseModel>, EntityToDatabaseModelMapper>()
+                );
         }
     }
 }

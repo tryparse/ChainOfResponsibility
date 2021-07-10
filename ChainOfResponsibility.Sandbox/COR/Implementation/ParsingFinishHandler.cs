@@ -1,4 +1,5 @@
 ﻿using ChainOfResponsibility.Sandbox.COR.Core;
+using ChainOfResponsibility.Sandbox.Entities;
 
 namespace ChainOfResponsibility.Sandbox.COR.Implementation
 {

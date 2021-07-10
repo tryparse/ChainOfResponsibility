@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ChainOfResponsibility.Sandbox
+namespace ChainOfResponsibility.Sandbox.Entities
 {
     public class FileData
     {

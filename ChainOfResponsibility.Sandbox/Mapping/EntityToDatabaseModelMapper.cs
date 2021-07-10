@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ChainOfResponsibility.Sandbox.COR.Implementation;
+using ChainOfResponsibility.Sandbox.Entities;
 
 namespace ChainOfResponsibility.Sandbox.Mapping
 {

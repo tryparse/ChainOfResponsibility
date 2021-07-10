@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using ChainOfResponsibility.Sandbox.COR.Implementation;
+using ChainOfResponsibility.Sandbox.Entities;
 
 namespace ChainOfResponsibility.Sandbox.Mapping
 {

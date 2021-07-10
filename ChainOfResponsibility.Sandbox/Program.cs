@@ -1,4 +1,5 @@
 ﻿using System;
+using ChainOfResponsibility.Sandbox.Entities;
 using ChainOfResponsibility.Sandbox.Mapping;
 using ChainOfResponsibility.Sandbox.Runners;
 using ChainOfResponsibility.Sandbox.Validation;

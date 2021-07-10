@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlTypes;
 
-namespace ChainOfResponsibility.Sandbox
+namespace ChainOfResponsibility.Sandbox.Entities
 {
     public class Entity : IValidatableObject
     {
@@ -12,12 +12,12 @@ namespace ChainOfResponsibility.Sandbox
 
         [StringLength(10)]
         public string FirstName { get; set; }
-        
+
         [StringLength(10)]
         public string LastName { get; set; }
-        
+
         public DateTime? BirthDate { get; set; }
-        
+
         public int? Age { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

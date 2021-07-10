@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ChainOfResponsibility.Sandbox.Entities;
 using ChainOfResponsibility.Sandbox.Mapping;
 using ChainOfResponsibility.Sandbox.Runners;
@@ -14,9 +15,15 @@ namespace ChainOfResponsibility.Sandbox
         {
             using IHost host = CreateHostBuilder(args).Build();
 
-            var runner = host.Services.GetRequiredService<IRunner>();
+            var simpleRunner = host.Services.GetServices<IRunner>()
+                .First(x => x.GetType() == typeof(SimpleRunner));
 
-            runner.Run();
+            simpleRunner.Run();
+
+            var corRunner = host.Services.GetServices<IRunner>()
+                .First(x => x.GetType() == typeof(CORRunner));
+
+            corRunner.Run();
 
             Console.WriteLine("done");
             Console.ReadKey(true);
@@ -27,6 +34,7 @@ namespace ChainOfResponsibility.Sandbox
             return Host.CreateDefaultBuilder(args)
                 .ConfigureServices((_, services) =>
                     services
+                        .AddSingleton<IRunner, SimpleRunner>()
                         .AddSingleton<IRunner, CORRunner>()
                         .AddTransient<IValidator<Entity>, CommonValidator<Entity>>()
                         .AddTransient<IValidator<DatabaseModel>, CommonValidator<DatabaseModel>>()

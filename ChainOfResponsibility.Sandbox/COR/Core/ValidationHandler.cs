@@ -1,5 +1,6 @@
 ﻿using System;
 using ChainOfResponsibility.Sandbox.Validation;
+using FluentValidation;
 
 namespace ChainOfResponsibility.Sandbox.COR.Core
 {

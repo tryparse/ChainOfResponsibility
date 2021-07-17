@@ -48,7 +48,7 @@ namespace ChainOfResponsibility.Sandbox.Mapping
 
                 if (int.TryParse(sourceEntity.Fields[4], out var age))
                 {
-                    resultEntity.Age = age;
+                    resultEntity.Amount = age;
                 }
                 else
                 {

@@ -4,6 +4,7 @@ using ChainOfResponsibility.Sandbox.Entities;
 using ChainOfResponsibility.Sandbox.Mapping;
 using ChainOfResponsibility.Sandbox.Runners;
 using ChainOfResponsibility.Sandbox.Validation;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -36,8 +37,8 @@ namespace ChainOfResponsibility.Sandbox
                     services
                         .AddSingleton<IRunner, SimpleRunner>()
                         .AddSingleton<IRunner, CORRunner>()
-                        .AddTransient<IValidator<Entity>, CommonValidator<Entity>>()
-                        .AddTransient<IValidator<DatabaseModel>, CommonValidator<DatabaseModel>>()
+                        .AddTransient<IValidator<Entity>, EntityValidator>()
+                        .AddTransient<IValidator<DatabaseModel>, DatabaseModelValidator>()
                         .AddTransient<IMapper<FileData, Entity>, FileDataToEntityMapper>()
                         .AddTransient<IMapper<Entity, DatabaseModel>, EntityToDatabaseModelMapper>()
                 );

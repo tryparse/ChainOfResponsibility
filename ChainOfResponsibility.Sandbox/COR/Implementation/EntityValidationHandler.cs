@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using ChainOfResponsibility.Sandbox.COR.Core;
 using ChainOfResponsibility.Sandbox.Entities;
-using ChainOfResponsibility.Sandbox.Validation;
+using FluentValidation;
 
 namespace ChainOfResponsibility.Sandbox.COR.Implementation
 {
@@ -23,9 +22,9 @@ namespace ChainOfResponsibility.Sandbox.COR.Implementation
                     context.ParserWarnings.AddRange(context.EntityValidationResult.Errors
                         .Select(x => new ParserWarning
                     {
-                        FieldName = x.MemberNames.FirstOrDefault(),
+                        FieldName = x.PropertyName,
                         Message = x.ErrorMessage,
-                        IsCritical = x.ErrorMessage.Contains("required")
+                        IsCritical = x.Severity == Severity.Error
                     }));
                 }
 

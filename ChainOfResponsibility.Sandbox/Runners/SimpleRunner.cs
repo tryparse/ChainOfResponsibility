@@ -4,6 +4,7 @@ using System.Linq;
 using ChainOfResponsibility.Sandbox.Entities;
 using ChainOfResponsibility.Sandbox.Mapping;
 using ChainOfResponsibility.Sandbox.Validation;
+using FluentValidation;
 
 namespace ChainOfResponsibility.Sandbox.Runners
 {

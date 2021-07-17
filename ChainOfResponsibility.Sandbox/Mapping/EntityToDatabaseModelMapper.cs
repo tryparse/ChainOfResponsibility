@@ -14,7 +14,7 @@ namespace ChainOfResponsibility.Sandbox.Mapping
             resultEntity.ID = sourceEntity.ID;
             resultEntity.FullName = $"{sourceEntity.FirstName} {sourceEntity.LastName}";
             resultEntity.BirthDate = sourceEntity.BirthDate;
-            resultEntity.Age = sourceEntity.Age;
+            resultEntity.Amount = sourceEntity.Amount;
 
             return new MappingResult<DatabaseModel>
             {

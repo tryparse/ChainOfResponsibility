@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using ChainOfResponsibility.Sandbox.Mapping;
-using ChainOfResponsibility.Sandbox.Validation;
 using FluentValidation.Results;
 
 namespace ChainOfResponsibility.Sandbox.COR.Implementation

@@ -3,10 +3,6 @@ using ChainOfResponsibility.Sandbox.Validation;
 using FluentValidation;
 using FluentValidation.TestHelper;
 using NUnit.Framework;
-using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace ChainOfResponsibility.Tests
 {
@@ -26,7 +22,7 @@ namespace ChainOfResponsibility.Tests
         {
             var entity = new Entity
             {
-                ID = 1,
+                ID = null,
                 FirstName = string.Empty,
                 LastName = string.Empty,
                 BirthDate = null,
@@ -37,32 +33,39 @@ namespace ChainOfResponsibility.Tests
 
             result.ShouldHaveValidationErrorFor(x => x.ID);
         }
-    }
 
-    public static class FluentValidationTestExtensions
-    {
-        public static void ShouldHaveValidationErrorFor<TSource, TValue, TProperty>(
-            this TestValidationResult<TSource, TValue> validationResult, 
-            Expression<Func<TSource, TProperty>> expression) where TSource: class
+        [Test]
+        public void Too_Long_FirstName_Should_Be_Validated()
         {
-            var type = typeof(TSource);
-
-            MemberExpression memberExpression = expression.Body as MemberExpression;
-            PropertyInfo propertyInfo = memberExpression?.Member as PropertyInfo;
-
-            if (!string.IsNullOrEmpty(propertyInfo.Name))
+            var entity = new Entity
             {
-                var property = type.GetProperty(propertyInfo.Name);
+                ID = 0,
+                FirstName = "123456789012345",
+                LastName = string.Empty,
+                BirthDate = null,
+                Amount = null
+            };
 
-                if (!validationResult.Result.Errors.Any(x => x.PropertyName == propertyInfo.Name))
-                {
-                    throw new ValidationTestException($"{property.Name}");
-                }
-            }
-            else
+            var result = _validator.TestValidate(entity);
+
+            result.ShouldHaveValidationErrorFor(x => x.FirstName);
+        }
+
+        [Test]
+        public void Too_Long_LastName_Should_Be_Validated()
+        {
+            var entity = new Entity
             {
-                throw new ArgumentException();
-            }
+                ID = 0,
+                FirstName = string.Empty,
+                LastName = "123456789012345",
+                BirthDate = null,
+                Amount = null
+            };
+
+            var result = _validator.TestValidate(entity);
+
+            result.ShouldHaveValidationErrorFor(x => x.LastName);
         }
     }
 }

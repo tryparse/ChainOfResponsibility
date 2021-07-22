@@ -16,7 +16,7 @@ namespace ChainOfResponsibility.Sandbox.Validation
                 .InclusiveBetween(SqlDateTime.MinValue.Value, SqlDateTime.MaxValue.Value)
                 .WithErrorCode("EMAIL");
             RuleFor(x => x.Amount)
-                .ScalePrecision(10, 2);
+                .ScalePrecision(2, 4);
         }
     }
 }

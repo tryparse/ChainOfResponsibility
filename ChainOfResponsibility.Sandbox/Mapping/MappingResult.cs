@@ -8,7 +8,7 @@ namespace ChainOfResponsibility.Sandbox.Mapping
     {
         public T Entity { get; set; }
 
-        public List<ParserWarning> Errors { get; set; }
+        public List<MappingError> Errors { get; set; }
 
         public bool IsMapped => !Errors.Any();
     }

@@ -16,6 +16,8 @@ namespace ChainOfResponsibility.Sandbox
         {
             using IHost host = CreateHostBuilder(args).Build();
 
+            ValidatorOptions.LanguageManager.Enabled = false;
+
             var simpleRunner = host.Services.GetServices<IRunner>()
                 .First(x => x.GetType() == typeof(SimpleRunner));
 

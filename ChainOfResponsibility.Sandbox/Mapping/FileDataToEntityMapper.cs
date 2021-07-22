@@ -10,7 +10,7 @@ namespace ChainOfResponsibility.Sandbox.Mapping
     {
         public IMappingResult<Entity> Map(FileData sourceEntity)
         {
-            var mappingErrors = new List<ParserWarning>();
+            var mappingErrors = new List<MappingError>();
             var resultEntity = new Entity();
 
             try
@@ -21,7 +21,7 @@ namespace ChainOfResponsibility.Sandbox.Mapping
                 }
                 else
                 {
-                    mappingErrors.Add(new ParserWarning
+                    mappingErrors.Add(new MappingError
                     {
                         FieldName = nameof(resultEntity.ID),
                         FieldValue = sourceEntity.Fields[0],
@@ -38,7 +38,7 @@ namespace ChainOfResponsibility.Sandbox.Mapping
                 }
                 else
                 {
-                    mappingErrors.Add(new ParserWarning
+                    mappingErrors.Add(new MappingError
                     {
                         FieldName = nameof(resultEntity.BirthDate),
                         FieldValue = sourceEntity.Fields[3],
@@ -52,7 +52,7 @@ namespace ChainOfResponsibility.Sandbox.Mapping
                 }
                 else
                 {
-                    mappingErrors.Add(new ParserWarning
+                    mappingErrors.Add(new MappingError
                     {
                         FieldName = nameof(resultEntity.BirthDate),
                         FieldValue = sourceEntity.Fields[4],
@@ -62,7 +62,7 @@ namespace ChainOfResponsibility.Sandbox.Mapping
             }
             catch (Exception ex)
             {
-                mappingErrors.Add(new ParserWarning
+                mappingErrors.Add(new MappingError
                 {
                     Message = ex.Message
                 });

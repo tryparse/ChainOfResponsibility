@@ -8,7 +8,7 @@ namespace ChainOfResponsibility.Sandbox.Mapping
     {
         public IMappingResult<DatabaseModel> Map(Entity sourceEntity)
         {
-            var errors = new List<ParserWarning>();
+            var errors = new List<MappingError>();
             var resultEntity = new DatabaseModel();
 
             resultEntity.ID = sourceEntity.ID;

@@ -36,4 +36,12 @@ namespace ChainOfResponsibility.Sandbox.COR.Implementation
             }
         }
     }
+
+    public class ParserWarning
+    {
+        public string FieldName { get; set; }
+        public string FieldValue { get; set; }
+        public string Message { get; set; }
+        public bool IsCritical { get; set; }
+    }
 }

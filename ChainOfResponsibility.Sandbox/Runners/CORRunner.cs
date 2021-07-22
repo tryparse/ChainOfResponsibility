@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ChainOfResponsibility.Sandbox.COR.Core;
 using ChainOfResponsibility.Sandbox.COR.Implementation;
 using ChainOfResponsibility.Sandbox.Entities;
 using ChainOfResponsibility.Sandbox.Mapping;
-using ChainOfResponsibility.Sandbox.Validation;
 using FluentValidation;
 
 namespace ChainOfResponsibility.Sandbox.Runners
@@ -58,5 +56,10 @@ namespace ChainOfResponsibility.Sandbox.Runners
             Console.WriteLine($"IsSuccessed={request.IsSuccessed}");
             Console.WriteLine(string.Join("; ", request.ParserWarnings.Select(x => x.ToString())));
         }
+    }
+
+    class AbstractFlowBuilder<TRequest>
+    {
+        
     }
 }
